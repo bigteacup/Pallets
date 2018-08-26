@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Switch
+        android:id="@+id/selectionnerToutParDefaut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:text="@string/selectionnerTout" />
+
+    <Switch
+        android:id="@+id/utiliserValeurParDefaut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="20dp"
+        android:text="@string/valeursDefauts" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/defautNombrePalettes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/NombreDePalettes"
+            android:inputType="number|numberDecimal" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/defautTarePalette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/PoidPalette"
+            android:inputType="number|numberDecimal" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/defautTareColis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/TareColis"
+            android:inputType="number|numberDecimal" />
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

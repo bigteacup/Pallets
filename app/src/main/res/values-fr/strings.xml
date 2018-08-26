@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Palets</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="PoidNetAnnoncé">Poid Net Annoncé</string>
+    <string name="BrutManquant">Brut Manquant</string>
+    <string name="NetManquant">Net Manquant</string>
+    <string name="BrutNetManquant">Brut/Net Manquant</string>
+    <string name="PoidNetréel">Poid Net réel</string>
+    <string name="NombredeFruits">Nombre de Pièces</string>
+    <string name="Nombredecolis">Nombre de colis</string>
+    <string name="Taretotale">Tare totale</string>
+    <string name="Pourcentageabimés">Pourcentage abimés</string>
+    <string name="PoidMoyenPièce">Poid Moyen/Pièce</string>
+    <string name="PoidNetMoyenColis">Poid Net Moyen/Colis</string>
+    <string name="Nombredepalettes">Nombre de palettes</string>
+    <string name="PoidBrutattendu">Poid Brut attendu</string>
+    <string name="Delta">Delta Poids Nets</string>
+    <string name="PoidBrut">Poid Brut</string>
+    <string name="NombreDePalettes">Nombre Pal. au Sol</string>
+    <string name="PoidPalette">Poid Pal. + intermediaire</string>
+    <string name="NombredeColis">Nombre de colis</string>
+    <string name="Coliscolonne">Colis/colonne</string>
+    <string name="Colistranche">Colis/tranche</string>
+    <string name="TareColis">Tare Colis</string>
+    <string name="Piecescolis">Pieces/colis</string>
+    <string name="Tachées">Abimées</string>
+    <string name="Echantillon">Echantillon</string>
+    <string name="Clear">Clear</string>
+    <string name="PeséeBL">Pesée/B.L.</string>
+    <string name="FullFast">Full/Fast</string>
+    <string name="echantillon">Echantillon</string>
+    <string name="sur">sur</string>
+    <string name="colis">colis</string>
+    <string name="options">Options</string>
+    <string name="valeursDefauts">Utiliser les valeurs par defaut</string>
+    <string name="selectionnerTout">Selectionner tout par defaut</string>
+
+</resources>
+

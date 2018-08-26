@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Palets</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="PoidNetAnnoncé">Bill Net Weight</string>
+    <string name="BrutManquant">Gross Missing</string>
+    <string name="NetManquant">Net Missing</string>
+    <string name="BrutNetManquant">Gross/Net Missing</string>
+    <string name="PoidNetréel">Real Net Weight</string>
+    <string name="NombredeFruits">Pieces Count</string>
+    <string name="Nombredecolis">Package Count</string>
+    <string name="Taretotale">Total tare</string>
+    <string name="Pourcentageabimés">Percentage damaged</string>
+    <string name="PoidMoyenPièce">Average Weight/Piece</string>
+    <string name="PoidNetMoyenColis">Average Net Weight/Package</string>
+    <string name="Nombredepalettes">Palets Count</string>
+    <string name="PoidBrutattendu">Expected Gross Weight</string>
+    <string name="Delta">Delta Net Weight</string>
+    <string name="NombreDePalettes">Floor Palets Count</string>
+    <string name="PoidPalette">Palet Weight +intermediate</string>
+    <string name="NombredeColis">Packages Count</string>
+    <string name="Coliscolonne">Package/Column</string>
+    <string name="Colistranche">Package/Slice</string>
+    <string name="TareColis">Package tare</string>
+    <string name="Piecescolis">Pieces/Package</string>
+    <string name="Tachées">Damaged</string>
+    <string name="Echantillon">Sample</string>
+    <string name="Clear">Clear</string>
+    <string name="PeséeBL">Weigh./Inv.</string>
+    <string name="FullFast">Full/Fast</string>
+    <string name="echantillon">Sample</string>
+    <string name="sur">of</string>
+    <string name="colis">packages</string>
+    <string name="PoidBrut">Gross Weight</string>
+    <string name="options">Options</string>
+    <string name="valeursDefauts">Use default values</string>
+    <string name="selectionnerTout">Select all by default</string>
+</resources>

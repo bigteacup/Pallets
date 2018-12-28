@@ -12,6 +12,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -65,6 +66,11 @@ public class EcranPremier extends AppCompatActivity   {
     private TextInputEditText nombreColisEchantillon;
     private LinearLayout colonneTrancheLayout;
     private LinearLayout tachesEchantillonLayout;
+
+    private LinearLayout nombrePoidEchantillonLayout;
+    private TextInputEditText poidEchantillon;
+    private TextInputEditText nombrePoidEchantillon;
+
     private TextInputLayout poidNetInputLayout;
     private TextInputEditText  poidNetAnnonce;
     private ScrollView scrollView;
@@ -76,7 +82,7 @@ public class EcranPremier extends AppCompatActivity   {
   boolean utiliserValeurParDefaut ;
 
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    //private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -137,11 +143,14 @@ public class EcranPremier extends AppCompatActivity   {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        //
+
+
+        /* mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+*/
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         outils.setSharedPreferences(sharedPreferences);
 
@@ -355,9 +364,59 @@ public class EcranPremier extends AppCompatActivity   {
             @Override
             public void afterTextChanged(Editable s)
             {
+                fullFastSetup();
                 calculer();
             }
         });
+
+        poidEchantillon = findViewById(R.id.poidEchantillon);
+        poidEchantillon.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int st, int b, int c)
+            {
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int st, int c, int a)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                fullFastSetup();
+                calculer();
+            }
+        });
+
+        nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
+        nombrePoidEchantillon.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int st, int b, int c)
+            {
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int st, int c, int a)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                fullFastSetup();
+                calculer();
+            }
+        });
+
 
         colisParColonne = findViewById(R.id.colisParColonne);
         colisParColonne.addTextChangedListener(new TextWatcher() {
@@ -513,6 +572,8 @@ public class EcranPremier extends AppCompatActivity   {
         nombreDePalettes = findViewById(R.id.nombreDePalettes);
         poidPalet = findViewById(R.id.poidPalet) ;
         tareColis = findViewById(R.id.tareColis);
+        poidEchantillon = findViewById(R.id.poidEchantillon);
+        nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
 
         setSelectAllParDefaut(outils.loadBoolean("selectionnerToutParDefaut", true));
         setUtiliserValeurParDefaut(outils.loadBoolean("utiliserValeurParDefaut", false));
@@ -616,20 +677,22 @@ if( utiliserValeurParDefaut == true) {
 
 
 
-public void calculer(){
+public void calculer() {
     poidNetAnnonce = findViewById(R.id.poidNetAnnonce);
-      poidBrut = findViewById(R.id.poidBrut);
-      nombreDePalettes = findViewById(R.id.nombreDePalettes);
-      poidPalet = findViewById(R.id.poidPalet) ;
-      piecesParColis = findViewById(R.id.piecesParColis);
-      colisParColonne = findViewById(R.id.colisParColonne);
-      colisParTranche = findViewById(R.id.colisParTranche);
-      tareColis = findViewById(R.id.tareColis);
-      nombreDeColis = findViewById(R.id.nombreDeColis);
-      piecesAbimees = findViewById(R.id.piecesAbimees);
-      nombreColisEchantillon = findViewById(R.id.nombreColisEchantillon);
+    poidBrut = findViewById(R.id.poidBrut);
+    nombreDePalettes = findViewById(R.id.nombreDePalettes);
+    poidPalet = findViewById(R.id.poidPalet);
+    piecesParColis = findViewById(R.id.piecesParColis);
+    colisParColonne = findViewById(R.id.colisParColonne);
+    colisParTranche = findViewById(R.id.colisParTranche);
+    tareColis = findViewById(R.id.tareColis);
+    nombreDeColis = findViewById(R.id.nombreDeColis);
+    piecesAbimees = findViewById(R.id.piecesAbimees);
+    nombreColisEchantillon = findViewById(R.id.nombreColisEchantillon);
+    poidEchantillon = findViewById(R.id.poidEchantillon);
+    nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
 
-      resultat = findViewById(R.id.resultat);
+    resultat = findViewById(R.id.resultat);
 
     double poidNetAnnonceD = 0.0;
     double poidBrutD = 0.0;
@@ -640,20 +703,63 @@ public void calculer(){
     double colisParTrancheD = 0.0;
     double tareColisD = 0.0;
     double nombreDeColisD = 0.0;
-    double piecesAbimeesD  = 0.0;
+    double piecesAbimeesD = 0.0;
     double nombreColisEchantillonD = 0.0;
+    double poidEchantillonD = 0.0;
+    double nombrePoidEchantillonD = 0.0;
 
-    try{  poidNetAnnonceD  = Double.parseDouble(poidNetAnnonce.getText().toString()); }catch(Exception e){}
-    try{  poidBrutD  = Double.parseDouble(poidBrut.getText().toString()); }catch(Exception e){}
-    try{  nombreDePalettesD  = Double.parseDouble(nombreDePalettes.getText().toString()); }catch(Exception e){}
-    try{  poidPaletD  = Double.parseDouble(poidPalet.getText().toString()); }catch(Exception e){}
-    try{  piecesParColisD  = Double.parseDouble(piecesParColis.getText().toString()); }catch(Exception e){}
-    try{  colisParColonneD  = Double.parseDouble(colisParColonne.getText().toString()); }catch(Exception e){}
-    try{  colisParTrancheD  = Double.parseDouble(colisParTranche.getText().toString()); }catch(Exception e){}
-    try{  tareColisD  = Double.parseDouble(tareColis.getText().toString()); }catch(Exception e){}
-    try{  nombreDeColisD  = Double.parseDouble(nombreDeColis.getText().toString()); }catch(Exception e){}
-    try{  piecesAbimeesD  = Double.parseDouble(piecesAbimees.getText().toString()); }catch(Exception e){}
-    try{  nombreColisEchantillonD  = Double.parseDouble(nombreColisEchantillon.getText().toString()); }catch(Exception e){}
+    try {
+        poidNetAnnonceD = Double.parseDouble(poidNetAnnonce.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        poidBrutD = Double.parseDouble(poidBrut.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        nombreDePalettesD = Double.parseDouble(nombreDePalettes.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        poidPaletD = Double.parseDouble(poidPalet.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        piecesParColisD = Double.parseDouble(piecesParColis.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        colisParColonneD = Double.parseDouble(colisParColonne.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        colisParTrancheD = Double.parseDouble(colisParTranche.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        tareColisD = Double.parseDouble(tareColis.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        nombreDeColisD = Double.parseDouble(nombreDeColis.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        piecesAbimeesD = Double.parseDouble(piecesAbimees.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        nombreColisEchantillonD = Double.parseDouble(nombreColisEchantillon.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        poidEchantillonD = Double.parseDouble(poidEchantillon.getText().toString());
+    } catch (Exception e) {
+    }
+    try {
+        nombrePoidEchantillonD = Double.parseDouble(nombrePoidEchantillon.getText().toString());
+    } catch (Exception e) {
+    }
 
 
     double poidNet = 0.0;
@@ -666,96 +772,160 @@ public void calculer(){
     double poidMoyenParPiece = 0.0;
     double poidBrutAttendu = 0.0;
     double delta = 0.0;
+    double nbrePiecesParColis = 0.0;
 
 //TODO Penser a un systeme  plus ergonomique pour le calcul du nombre et du poid de palette intermediaires
-    if (nombreDeColisD < 1 ){
-        nombreDeColisD  = (colisParColonneD * colisParTrancheD)*nombreDePalettesD;
+    if (nombreDeColisD < 1) {
+        nombreDeColisD = (colisParColonneD * colisParTrancheD) * nombreDePalettesD;
 
     }
 
-    try{ tareColisTotale =  (tareColisD*nombreDeColisD);  }catch(Exception e){}
-    try{ tarePalettes =  poidPaletD*nombreDePalettesD;  }catch(Exception e){}
-    try{ tareTotale =  tareColisTotale + tarePalettes;  }catch(Exception e){}
-    try{ poidNet =  poidBrutD - tareTotale;  }catch(Exception e){}
-    try{ nombreFruits = nombreDeColisD * piecesParColisD ;  }catch(Exception e){}
-    try{ poidMoyenColis = poidNet/nombreDeColisD; }catch(Exception e){}
-    try{ poidMoyenParPiece =  poidNet / nombreFruits;}catch(Exception e){}
-    try{ pourcentageAbimes = (piecesAbimeesD * 100) / (piecesParColisD*nombreColisEchantillonD);}catch(Exception e){}
-    try{ poidBrutAttendu =  (poidNetAnnonceD + tareTotale)/1 ;  }catch(Exception e){}
-    try{ delta = poidNet - poidNetAnnonceD;  }catch(Exception e){}
+    try {
+        tareColisTotale = (tareColisD * nombreDeColisD);
+    } catch (Exception e) {
+    }
+    try {
+        tarePalettes = poidPaletD * nombreDePalettesD;
+    } catch (Exception e) {
+    }
+    try {
+        tareTotale = tareColisTotale + tarePalettes;
+    } catch (Exception e) {
+    }
+    try {
+        poidNet = poidBrutD - tareTotale;
+    } catch (Exception e) {
+    }
+    try {
+        poidMoyenColis = poidNet / nombreDeColisD;
+    } catch (Exception e) {
+    }
+    try {
+        if (piecesParColis.getText().length() < 1) {
+            nombreFruits = nombreDeColisD * ((poidMoyenColis / poidEchantillonD) * nombrePoidEchantillonD);
+            nbrePiecesParColis = (poidMoyenColis / poidEchantillonD) * nombrePoidEchantillonD;
+        } else {
+            nombreFruits = nombreDeColisD * piecesParColisD;
+        }
+    } catch (Exception e) {
+    }
 
 
-/*
-    if (poidNet < 0.0){ poidNet = 0.0;}
-    if (tarePalettes < 0.0){ tarePalettes = 0.0;}
-    if (poidMoyenColis < 0.0){ poidMoyenColis = 0.0;}
-    if (pourcentageAbimes < 0.0){ pourcentageAbimes = 0.0;}
-    if (poidMoyenParPiece < 0.0){ poidMoyenParPiece = 0.0;}
-    if (poidBrutAttendu < 0.0){ poidBrutAttendu = 0.0;}
-    if (tareTotale < 0.0){ tareTotale = 0.0;}
-    if (nombreFruits < 0.0){ nombreFruits = 0.0;}
+    try {
+        poidMoyenParPiece = poidNet / nombreFruits;
+    } catch (Exception e) {
+    }
+    try {
+        if (piecesParColis.getText().length() < 1) {
+            pourcentageAbimes = (piecesAbimeesD * 100) / (nbrePiecesParColis * nombreColisEchantillonD);
+        }else {
+            pourcentageAbimes = (piecesAbimeesD * 100) / (piecesParColisD * nombreColisEchantillonD);
+        }
+    } catch (Exception e) {
+    }
+    try {
+        poidBrutAttendu = (poidNetAnnonceD + tareTotale) / 1;
+    } catch (Exception e) {
+    }
+    try {
+        delta = poidNet - poidNetAnnonceD;
+    } catch (Exception e) {
+    }
 
-    */
-
-
-   // if (tarePalettes < 0.0){ tarePalettes = 0.0;}
-    //   if (poidMoyenColis < 0.0){ poidMoyenColis = 0.0;}
-//    double tarePalettes = 0.0;
-//    double nombreFruits = 0.0;
-//    double poidMoyenColis = 0.0;
-//    double tareColisTotale = 0.0;
- //   double tareTotale = 0.0;
-//    double pourcentageAbimes = 0.0;
- //   double poidMoyenParPiece = 0.0;
- //   double poidBrutAttendu = 0.0;
-
-
-
+// TODO completer les manquants
     NumberFormat nf = new DecimalFormat("0.###");
 
     String poidNetString = nf.format(poidNet);
-    if(poidBrut.getText().length() == 0){ poidNetString =  getString(R.string.BrutManquant); }
+    if (poidBrut.getText().length() == 0) {
+        poidNetString = getString(R.string.BrutManquant);
+    }
 
     String tareTotaleString = nf.format(tareTotale);
     String tarePalettesString = nf.format(tarePalettes);
     String tareColisTotaleString = nf.format(tareColisTotale);
     String poidMoyenParPieceString = nf.format(poidMoyenParPiece);
-    if(poidBrut.getText().length() == 0){ poidMoyenParPieceString =  getString(R.string.BrutManquant); }
+    String nombreFruitsString = nf.format(nombreFruits);
+    String nbrePiecesParColisString = nf.format(nbrePiecesParColis);
+    if (poidBrut.getText().length() == 0) {
+        poidMoyenParPieceString = getString(R.string.BrutManquant);
+    }
     String pourcentageAbimesString = nf.format(pourcentageAbimes);
     String poidMoyenColisString = nf.format(poidMoyenColis);
-    if(poidBrut.getText().length() == 0){ poidMoyenColisString =  getString(R.string.BrutManquant); }
+    if (poidBrut.getText().length() == 0) {
+        poidMoyenColisString = getString(R.string.BrutManquant);
+    }
     String poidBrutAttenduString = nf.format(poidBrutAttendu);
-    if(poidNetAnnonce.getText().length() == 0 ){ poidBrutAttenduString =  getString(R.string.NetManquant); }
+    if (poidNetAnnonce.getText().length() == 0) {
+        poidBrutAttenduString = getString(R.string.NetManquant);
+    }
     String deltaString = nf.format(delta);
-    if(poidBrut.getText().length() == 0 || poidNetAnnonce.getText().length() == 0 ){ deltaString =  getString(R.string.BrutNetManquant); }
+    if (poidBrut.getText().length() == 0 || poidNetAnnonce.getText().length() == 0) {
+        deltaString = getString(R.string.BrutNetManquant);
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    if (fast == true) {
+        if (reverse == false) {
+            resultat.setText(
+                    getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
+                            getString(R.string.NombredeFruits) + " : " + nombreFruitsString + "\n" +
+                            getString(R.string.PoidNetMoyenColis) + "  : " + poidMoyenColisString + "\n" +
+                            getString(R.string.PoidMoyenPièce) + "  : " + poidMoyenParPieceString + "\n" +
+                            getString(R.string.Taretotale) + "  : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n"
+
+            )
+            ;
+        } else {
+            resultat.setText(
+                    getString(R.string.PoidBrutattendu) + " : " + poidBrutAttenduString + "\n" +
+                            getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
+                            getString(R.string.Delta) + " : " + deltaString + "\n" +
+                            getString(R.string.NombredeFruits) + " : " + nombreFruits + "\n" +
+                            getString(R.string.PoidNetMoyenColis) + " : " + poidMoyenColisString + "\n" +
+                            getString(R.string.PoidMoyenPièce) + " : " + poidMoyenParPieceString + "\n" +
+                            getString(R.string.Taretotale) + " : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n"
+
+            )
+            ;
+        }
+
+    }
+
+    else {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        if (reverse == false) {
+            resultat.setText(
+                    getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
+                            getString(R.string.NombredeFruits) + " : " + nombreFruitsString + "\n" +
+                            getString(R.string.Piecescolis) + " : " + nbrePiecesParColisString + "\n" +
+                            getString(R.string.PoidNetMoyenColis) + "  : " + poidMoyenColisString + "\n" +
+                            getString(R.string.PoidMoyenPièce) + "  : " + poidMoyenParPieceString + "\n" +
+                            getString(R.string.Taretotale) + "  : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n" +
+                            getString(R.string.Pourcentageabimés) + " : " + pourcentageAbimesString + "% " + getString(R.string.sur) + " " + nombreColisEchantillonD + " " + getString(R.string.colis) + " " + "\n" +
+                            getString(R.string.Nombredecolis) + "  : " + nombreDeColisD + "\n"
 
 
+            )
+            ;
+        } else {
+            resultat.setText(
+                    getString(R.string.PoidBrutattendu) + " : " + poidBrutAttenduString + "\n" +
+                            getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
+                            getString(R.string.Delta) + " : " + deltaString + "\n" +
+                            getString(R.string.NombredeFruits) + " : " + nombreFruits + "\n" +
+                            getString(R.string.Piecescolis) + " : " + nbrePiecesParColisString + "\n" +
+                            getString(R.string.PoidNetMoyenColis) + " : " + poidMoyenColisString + "\n" +
+                            getString(R.string.PoidMoyenPièce) + " : " + poidMoyenParPieceString + "\n" +
+                            getString(R.string.Taretotale) + " : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n" +
+                            getString(R.string.Pourcentageabimés) + " : " + pourcentageAbimesString + "% " + getString(R.string.sur) + " " + nombreColisEchantillonD + " " + getString(R.string.colis) + " " + "\n" +
+                            getString(R.string.Nombredecolis) + " : " + nombreDeColisD + "\n"
 
-if(reverse == false) {
-    resultat.setText(
-            getString(R.string.PoidNetréel)+" : " + poidNetString + "\n" +
-    getString(R.string.NombredeFruits)+" : " + nombreFruits + "\n" +
-    getString(R.string.Nombredecolis)+"  : " + nombreDeColisD + "\n" +
-    getString(R.string.Taretotale)+"  : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n" +
-    getString(R.string.Pourcentageabimés)+"  : " + pourcentageAbimesString + "% sur " + nombreColisEchantillonD + " colis" + "\n" +
-    getString(R.string.PoidMoyenPièce)+"  : " + poidMoyenParPieceString + "\n" +
-    getString(R.string.PoidNetMoyenColis)+"  : " + poidMoyenColisString + "\n" +
-    getString(R.string.Nombredepalettes)+" : " + nombreDePalettesD);
-}else{
-    resultat.setText(
-            getString(R.string.PoidBrutattendu)+" : " + poidBrutAttenduString + "\n" +
-    getString(R.string.PoidNetréel)+" : " + poidNetString + "\n" +
-    getString(R.string.Delta)+" : " + deltaString + "\n" +
-    getString(R.string.NombredeFruits)+" : " + nombreFruits + "\n" +
-    getString(R.string.Nombredecolis)+" : " + nombreDeColisD + "\n" +
-    getString(R.string.Taretotale)+" : " + tareTotaleString + " (" + tarePalettesString + "/" + tareColisTotaleString + ") " + "\n" +
-    getString(R.string.Pourcentageabimés)+" : " + pourcentageAbimesString + "% " + getString(R.string.sur) +" " + nombreColisEchantillonD + " " + getString(R.string.colis) +" " + "\n" +
-    getString(R.string.PoidMoyenPièce)+" : " + poidMoyenParPieceString + "\n" +
-    getString(R.string.PoidNetMoyenColis)+" : " + poidMoyenColisString + "\n" +
-    getString(R.string.Nombredepalettes)+" : " + nombreDePalettesD);
+
+            )
+            ;
+        }
+    }
 }
-}
-
 
 
 
@@ -773,6 +943,9 @@ public void clear(){
     piecesAbimees = findViewById(R.id.piecesAbimees);
     nombreColisEchantillon = findViewById(R.id.nombreColisEchantillon);
     poidNetAnnonce = findViewById(R.id.poidNetAnnonce);
+    poidEchantillon = findViewById(R.id.poidEchantillon);
+    nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
+
     poidBrut.getText().clear();
     nombreDePalettes.getText().clear();
     poidPalet.getText().clear();
@@ -784,6 +957,9 @@ public void clear(){
     piecesAbimees.getText().clear();
     nombreColisEchantillon.getText().clear();
     poidNetAnnonce.getText().clear();
+    poidEchantillon.getText().clear();
+    nombrePoidEchantillon.getText().clear();
+
 
     setUtiliserValeurParDefaut(outils.loadBoolean("utiliserValeurParDefaut", false));
 }
@@ -804,7 +980,7 @@ public void switcherFullFast(){
 
 public void fullFastSetup() {
 
-    if (nombreDeColis.getText().length() > 0) {
+    if (nombreDeColis.getText().length() > 0 ) { // || fast == true
         colisParTranche.setEnabled(false);
         colisParColonne.setEnabled(false);
         nombreDeColis.setNextFocusDownId(findViewById(R.id.tareColis).getId());
@@ -834,6 +1010,39 @@ public void fullFastSetup() {
 
 
 
+
+
+    if (piecesParColis.getText().length() > 0) {
+        poidEchantillon.setEnabled(false);
+        nombrePoidEchantillon.setEnabled(false);
+        piecesParColis.setNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+
+
+    } else {
+        poidEchantillon.setEnabled(true);
+        nombrePoidEchantillon.setEnabled(true);
+        piecesParColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());
+
+    }
+
+    if (poidEchantillon.getText().length() > 0 ) {
+        piecesParColis.setEnabled(false);
+        tareColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());
+    } else {
+        if (poidEchantillon.getText().length() == 0 ) {
+            piecesParColis.setEnabled(true);
+           tareColis.setNextFocusDownId(findViewById(R.id.piecesParColis).getId());
+        }
+
+    }
+
+
+
+
+
+    calculer();
+
+
 }
 
 public void fastMode(){
@@ -847,6 +1056,9 @@ public void fastMode(){
     tachesEchantillonLayout = findViewById(R.id.tachesEchantillonLayout);
     piecesAbimees = findViewById(R.id.piecesAbimees);
     nombreColisEchantillon = findViewById(R.id.nombreColisEchantillon);
+
+    poidEchantillon = findViewById(R.id.poidEchantillon);
+    nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
 
         if(fast == false ) {
             colisParColonne.getText().clear();
@@ -862,8 +1074,19 @@ public void fastMode(){
             piecesAbimees.setVisibility(View.VISIBLE);
             nombreColisEchantillon.setVisibility(View.VISIBLE);
 
+            poidEchantillon.setVisibility(View.VISIBLE);
+            nombrePoidEchantillon.setVisibility(View.VISIBLE);
+
             nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
-            piecesParColis.setNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+            piecesParColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());
+
+             poidEchantillon.setNextFocusDownId(findViewById(R.id.nombrePoidEchantillon).getId());
+             nombrePoidEchantillon.setNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+
+           // poidEchantillonsetNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+           // nombrePoidEchantillonsetNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+
+
 
             fullFastSetup();
 
@@ -876,6 +1099,8 @@ public void fastMode(){
             colisParTranche.getText().clear();
             piecesAbimees.getText().clear();
             nombreColisEchantillon.getText().clear();
+            poidEchantillon.getText().clear();
+            nombrePoidEchantillon.getText().clear();
 
             colonneTrancheLayout.setVisibility(View.GONE);
             colisParColonne.setVisibility(View.GONE);
@@ -885,10 +1110,15 @@ public void fastMode(){
             piecesAbimees.setVisibility(View.GONE);
             nombreColisEchantillon.setVisibility(View.GONE);
 
+            poidEchantillon.setVisibility(View.GONE);
+            nombrePoidEchantillon.setVisibility(View.GONE);
+
             nombreDeColis.setNextFocusDownId(findViewById(R.id.tareColis).getId());
             piecesParColis.setNextFocusDownId(findViewById(R.id.fab).getId());
 
-            fullFastSetup();
+
+
+          //  fullFastSetup();
 
         }
 
@@ -943,6 +1173,8 @@ public void reversePalets(){
         nombreDeColis = findViewById(R.id.nombreDeColis);
         piecesAbimees = findViewById(R.id.piecesAbimees);
         nombreColisEchantillon = findViewById(R.id.nombreColisEchantillon);
+        poidEchantillon = findViewById(R.id.poidEchantillon);
+        nombrePoidEchantillon = findViewById(R.id.nombrePoidEchantillon);
 
         poidBrut.setSelectAllOnFocus(trueOrFalse);
         nombreDePalettes.setSelectAllOnFocus(trueOrFalse);
@@ -955,6 +1187,8 @@ public void reversePalets(){
         piecesAbimees.setSelectAllOnFocus(trueOrFalse);
         nombreColisEchantillon.setSelectAllOnFocus(trueOrFalse);
         poidNetAnnonce.setSelectAllOnFocus(trueOrFalse);
+        poidEchantillon.setSelectAllOnFocus(trueOrFalse);
+        nombrePoidEchantillon.setSelectAllOnFocus(trueOrFalse);
 
 
     }
@@ -963,6 +1197,7 @@ if(trueOrFalse == true) {
     nombreDePalettes = findViewById(R.id.nombreDePalettes);
     poidPalet = findViewById(R.id.poidPalet);
     tareColis = findViewById(R.id.tareColis);
+    nombrePoidEchantillon.findViewById(R.id.nombrePoidEchantillon);
 
     if(outils.loadString("defautNombrePalettes", "").length() > 0){
         nombreDePalettes.setText(outils.loadString("defautNombrePalettes", ""));
@@ -972,6 +1207,9 @@ if(trueOrFalse == true) {
     }
     if(outils.loadString("defautTareColis", "").length() > 0){
         tareColis.setText(outils.loadString("defautTareColis", ""));
+    }
+    if(outils.loadString("defautNombrePoidEchantillon", "").length() > 0){
+        nombrePoidEchantillon.setText(outils.loadString("defautNombrePoidEchantillon", ""));
     }
   /*
   nombreDePalettes.setText(outils.loadString("defautNombrePalettes",""));
@@ -993,7 +1231,7 @@ if(trueOrFalse == true) {
 
 
 
-
+    /*
 
 
 
@@ -1001,23 +1239,22 @@ if(trueOrFalse == true) {
     //innerclass
 
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+   // A placeholder fragment containing a simple view.
+
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+        //
+         // The fragment argument representing the section number for this
+         // fragment.
+         //
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
+        //
+         // Returns a new instance of this fragment for the given section
+         // number.
+         //
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -1036,10 +1273,10 @@ if(trueOrFalse == true) {
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    //
+     // A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     // one of the sections/tabs/pages.
+     //
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -1060,5 +1297,5 @@ if(trueOrFalse == true) {
         }
     }
 
-
+*/
 }

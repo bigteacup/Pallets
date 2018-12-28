@@ -27,6 +27,7 @@ public class Options  extends Activity {
     TextInputEditText defautNombrePalettes;
     TextInputEditText defautTarePalette;
     TextInputEditText defautTareColis;
+    TextInputEditText defautNombrePoidEchantillon;
 
     @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -144,6 +145,32 @@ public class Options  extends Activity {
                 outils.saveString("defautTareColis", defautTareColis.getText().toString().trim());
             }
         });
+
+        String defautNombrePoidEchantillonString = outils.loadString("defautNombrePoidEchantillon","");
+        defautNombrePoidEchantillon = findViewById(R.id.defautNombrePoidEchantillon);
+        defautNombrePoidEchantillon.setText(defautNombrePoidEchantillonString);
+        defautNombrePoidEchantillon.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int st, int b, int c)
+            {
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int st, int c, int a)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                outils.saveString("defautNombrePoidEchantillon", defautNombrePoidEchantillon.getText().toString().trim());
+            }
+        });
+
         }
 
 

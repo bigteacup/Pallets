@@ -6,8 +6,8 @@ android {
         applicationId "com.someoctets.palets"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 24
-        versionName "24"
+        versionCode 29
+        versionName "29"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {

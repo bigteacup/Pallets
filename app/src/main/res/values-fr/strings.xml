@@ -25,11 +25,12 @@
     <string name="TareColis">Tare Colis</string>
     <string name="Piecescolis">Pieces/colis</string>
     <string name="Tachées">Abimées</string>
-    <string name="Echantillon">Echantillon</string>
+    <string name="PoidEchantillon">Poid échantillon</string>
+    <string name="NbrePoidEchantillon">Pièces/échantillon</string>
     <string name="Clear">Clear</string>
     <string name="PeséeBL">Pesée/B.L.</string>
     <string name="FullFast">Full/Fast</string>
-    <string name="echantillon">Echantillon</string>
+    <string name="echantillon">Colis par échantillon</string>
     <string name="sur">sur</string>
     <string name="colis">colis</string>
     <string name="options">Options</string>

@@ -24,11 +24,12 @@
     <string name="TareColis">Package tare</string>
     <string name="Piecescolis">Pieces/Package</string>
     <string name="Tachées">Damaged</string>
-    <string name="Echantillon">Sample</string>
+    <string name="PoidEchantillon">Sample Weight</string>
+    <string name="NbrePoidEchantillon">Sample Numb.</string>
     <string name="Clear">Clear</string>
     <string name="PeséeBL">Weigh./Inv.</string>
     <string name="FullFast">Full/Fast</string>
-    <string name="echantillon">Sample</string>
+    <string name="echantillon">Numb. Pack. of Sample</string>
     <string name="sur">of</string>
     <string name="colis">packages</string>
     <string name="PoidBrut">Gross Weight</string>

@@ -996,17 +996,18 @@ public void fullFastSetup() {
 
 
     } else {
-
-           colisParTranche.setEnabled(true);
-           colisParColonne.setEnabled(true);
-           nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
-           //    colisParTranche.setFocusable(true);
-           // colisParTranche.setBackgroundColor(android.R.attr.editTextColor);
-           //  colisParColonne.setBackgroundColor(android.R.attr.editTextColor);
-           //  colisParColonne.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-
+        if(masquerMultiplicateur == false) {
+            colisParTranche.setEnabled(true);
+            colisParColonne.setEnabled(true);
+            nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+            //    colisParTranche.setFocusable(true);
+            // colisParTranche.setBackgroundColor(android.R.attr.editTextColor);
+            //  colisParColonne.setBackgroundColor(android.R.attr.editTextColor);
+            //  colisParColonne.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        }
     }
 
+    if(masquerMultiplicateur == false) {
         if (colisParColonne.getText().length() > 0 || colisParTranche.getText().length() > 0) {
             nombreDeColis.setEnabled(false);
             poidPalet.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
@@ -1017,7 +1018,7 @@ public void fullFastSetup() {
             }
 
         }
-
+    }
 
 
 

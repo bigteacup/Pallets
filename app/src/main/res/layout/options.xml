@@ -22,6 +22,15 @@
         android:paddingTop="20dp"
         android:text="@string/valeursDefauts" />
 
+    <Switch
+        android:id="@+id/masquermultiplicateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/masquerMultiplicateur" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

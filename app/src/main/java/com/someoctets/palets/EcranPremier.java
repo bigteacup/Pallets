@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
@@ -80,6 +81,7 @@ public class EcranPremier extends AppCompatActivity   {
    public Outils outils = Outils.getInstanceOutils();
   boolean selectAllParDefaut ;
   boolean utiliserValeurParDefaut ;
+  boolean masquerMultiplicateur;
 
 
     //private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -185,7 +187,7 @@ public class EcranPremier extends AppCompatActivity   {
 */
 
 
-        final TextView optionsButton  = (TextView) findViewById(R.id.titreToolbar);
+        final ConstraintLayout optionsButton  = (ConstraintLayout) findViewById(R.id.titreToolbar);
         optionsButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -577,6 +579,8 @@ public class EcranPremier extends AppCompatActivity   {
 
         setSelectAllParDefaut(outils.loadBoolean("selectionnerToutParDefaut", true));
         setUtiliserValeurParDefaut(outils.loadBoolean("utiliserValeurParDefaut", false));
+        setMasquerMultiplicateur();
+
 /*
 if( utiliserValeurParDefaut == true) {
 
@@ -600,6 +604,8 @@ if( utiliserValeurParDefaut == true) {
     public void onResume() {
         super.onResume();
         setSelectAllParDefaut(outils.loadBoolean("selectionnerToutParDefaut", true));
+        fastMode();
+       // fullFastSetup();
       //  setUtiliserValeurParDefaut(outils.loadBoolean("utiliserValeurParDefaut", false));
     }
 
@@ -960,7 +966,7 @@ public void clear(){
     poidEchantillon.getText().clear();
     nombrePoidEchantillon.getText().clear();
 
-
+    setMasquerMultiplicateur();
     setUtiliserValeurParDefaut(outils.loadBoolean("utiliserValeurParDefaut", false));
 }
 
@@ -980,6 +986,9 @@ public void switcherFullFast(){
 
 public void fullFastSetup() {
 
+
+
+
     if (nombreDeColis.getText().length() > 0 ) { // || fast == true
         colisParTranche.setEnabled(false);
         colisParColonne.setEnabled(false);
@@ -987,26 +996,31 @@ public void fullFastSetup() {
 
 
     } else {
-        colisParTranche.setEnabled(true);
-        colisParColonne.setEnabled(true);
-        nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
-        //    colisParTranche.setFocusable(true);
-        // colisParTranche.setBackgroundColor(android.R.attr.editTextColor);
-        //  colisParColonne.setBackgroundColor(android.R.attr.editTextColor);
-        //  colisParColonne.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
+           colisParTranche.setEnabled(true);
+           colisParColonne.setEnabled(true);
+           nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+           //    colisParTranche.setFocusable(true);
+           // colisParTranche.setBackgroundColor(android.R.attr.editTextColor);
+           //  colisParColonne.setBackgroundColor(android.R.attr.editTextColor);
+           //  colisParColonne.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
     }
 
-    if (colisParColonne.getText().length() > 0 || colisParTranche.getText().length() > 0 ) {
-        nombreDeColis.setEnabled(false);
-        poidPalet.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
-    } else {
-        if (colisParColonne.getText().length() == 0 || colisParTranche.getText().length() == 0) {
-            nombreDeColis.setEnabled(true);
-            poidPalet.setNextFocusDownId(findViewById(R.id.nombreDeColis).getId());
+        if (colisParColonne.getText().length() > 0 || colisParTranche.getText().length() > 0) {
+            nombreDeColis.setEnabled(false);
+            poidPalet.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+        } else {
+            if (colisParColonne.getText().length() == 0 || colisParTranche.getText().length() == 0) {
+                nombreDeColis.setEnabled(true);
+                poidPalet.setNextFocusDownId(findViewById(R.id.nombreDeColis).getId());
+            }
+
         }
 
-    }
+
+
+
 
 
 
@@ -1046,6 +1060,7 @@ public void fullFastSetup() {
 }
 
 public void fastMode(){
+    setMasquerMultiplicateur();
     piecesParColis = findViewById(R.id.piecesParColis);
     nombreDeColis = findViewById(R.id.nombreDeColis);
 
@@ -1066,9 +1081,18 @@ public void fastMode(){
             piecesAbimees.getText().clear();
             nombreColisEchantillon.getText().clear();
 
-            colonneTrancheLayout.setVisibility(View.VISIBLE);
-            colisParColonne.setVisibility(View.VISIBLE);
-            colisParTranche.setVisibility(View.VISIBLE);
+            if(masquerMultiplicateur == false) {
+                colonneTrancheLayout.setVisibility(View.VISIBLE);
+                colisParColonne.setVisibility(View.VISIBLE);
+                colisParTranche.setVisibility(View.VISIBLE);
+                nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+
+        }else {
+            colonneTrancheLayout.setVisibility(View.GONE);
+            colisParColonne.setVisibility(View.GONE);
+            colisParTranche.setVisibility(View.GONE);
+            nombreDeColis.setNextFocusDownId(findViewById(R.id.tareColis).getId());
+        }
 
             tachesEchantillonLayout.setVisibility(View.VISIBLE);
             piecesAbimees.setVisibility(View.VISIBLE);
@@ -1077,14 +1101,13 @@ public void fastMode(){
             poidEchantillon.setVisibility(View.VISIBLE);
             nombrePoidEchantillon.setVisibility(View.VISIBLE);
 
-            nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+         //   nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
             piecesParColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());
 
              poidEchantillon.setNextFocusDownId(findViewById(R.id.nombrePoidEchantillon).getId());
              nombrePoidEchantillon.setNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
 
-           // poidEchantillonsetNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
-           // nombrePoidEchantillonsetNextFocusDownId(findViewById(R.id.piecesAbimees).getId());
+
 
 
 
@@ -1225,9 +1248,10 @@ if(trueOrFalse == true) {
 
     }
 
-
-
-
+    public void setMasquerMultiplicateur() {
+       masquerMultiplicateur = (outils.loadBoolean("masquerMultiplicateur", true));
+       // fullFastSetup();
+    }
 
 
 

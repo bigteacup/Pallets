@@ -32,14 +32,34 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <android.support.constraint.ConstraintLayout
                         android:id="@+id/titreToolbar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:maxLines="1"
-                        android:minWidth="56dp"
-                        android:text="Palets" />
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/Palets"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:maxLines="1"
+                            android:minWidth="56dp"
+                            android:text="Palets"
+                            app:layout_constraintBottom_toTopOf="@+id/option"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/option"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Options"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/titreToolbar"
+                            app:layout_constraintTop_toBottomOf="@+id/titreToolbar" />
+
+                    </android.support.constraint.ConstraintLayout>
 
                     <Button
                         android:id="@+id/buttonClear"

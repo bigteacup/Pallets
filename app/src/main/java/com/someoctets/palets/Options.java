@@ -1,6 +1,7 @@
 package com.someoctets.palets;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,7 +24,8 @@ public class Options  extends Activity {
 
     boolean utiliserValeurParDefaut = false;
     boolean selectionnerToutParDefaut = false;
-
+    boolean masquerMultiplicateur = false;
+    // setMasquerMultiplicateur()
     TextInputEditText defautNombrePalettes;
     TextInputEditText defautTarePalette;
     TextInputEditText defautTareColis;
@@ -38,6 +40,8 @@ public class Options  extends Activity {
        outils.setSharedPreferences(sharedPreferences);
         utiliserValeurParDefaut = outils.loadBoolean("utiliserValeurParDefaut", false);
         selectionnerToutParDefaut = outils.loadBoolean("selectionnerToutParDefaut", true);
+        masquerMultiplicateur = outils.loadBoolean("masquerMultiplicateur", true);
+
 
 
         Switch utiliserValeurParDefautSwitch = findViewById(R.id.utiliserValeurParDefaut);
@@ -56,6 +60,16 @@ public class Options  extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 switcherSelectionnerToutParDefaut();
+
+            }
+        });
+
+        Switch masquerMultiplicateurSwitch = findViewById(R.id.masquermultiplicateur);
+        masquerMultiplicateurSwitch.setChecked(masquerMultiplicateur);
+        masquerMultiplicateurSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+                switcherMasquerMultiplicateur();
 
             }
         });
@@ -211,6 +225,18 @@ public class Options  extends Activity {
             }
     }
 
+
+
+    public void switcherMasquerMultiplicateur(){
+        if( masquerMultiplicateur == true){
+            masquerMultiplicateur = false;
+            outils.saveBoolean("masquerMultiplicateur", false);
+        }else {
+            masquerMultiplicateur = true;
+            outils.saveBoolean("masquerMultiplicateur", true);
+
+        }
+    }
 
 
 

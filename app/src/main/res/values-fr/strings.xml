@@ -36,6 +36,7 @@
     <string name="options">Options</string>
     <string name="valeursDefauts">Utiliser les valeurs par defaut</string>
     <string name="selectionnerTout">Selectionner tout par defaut</string>
+    <string name="masquerMultiplicateur">Masquer Multiplicateur</string>
 
 </resources>
 

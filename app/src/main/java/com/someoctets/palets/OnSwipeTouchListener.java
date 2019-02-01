@@ -1,4 +1,4 @@
-package com.someoctets.pallets;
+package com.someoctets.palets;
 
 import android.content.Context;
 import android.view.GestureDetector;

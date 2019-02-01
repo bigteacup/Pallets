@@ -1,4 +1,4 @@
-package com.someoctets.palets;
+package com.someoctets.pallets;
 
 import org.junit.Test;
 

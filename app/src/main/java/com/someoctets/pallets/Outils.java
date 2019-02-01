@@ -1,7 +1,6 @@
-package com.someoctets.palets;
+package com.someoctets.pallets;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class Outils {
 

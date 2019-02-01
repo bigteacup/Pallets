@@ -1,19 +1,14 @@
-package com.someoctets.palets;
+package com.someoctets.pallets;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 
 public class Options  extends Activity {

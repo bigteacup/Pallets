@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Palets</string>
+    <string name="app_name" translatable="false">Pallets</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="PoidNetAnnoncé">Bill Net Weight</string>
     <string name="BrutManquant">Gross Missing</string>
@@ -13,11 +13,11 @@
     <string name="Pourcentageabimés">Percentage damaged</string>
     <string name="PoidMoyenPièce">Average Weight/Piece</string>
     <string name="PoidNetMoyenColis">Average Net Weight/Package</string>
-    <string name="Nombredepalettes">Palets Count</string>
+    <string name="Nombredepalettes">Pallets Count</string>
     <string name="PoidBrutattendu">Expected Gross Weight</string>
     <string name="Delta">Delta Net Weight</string>
     <string name="NombreDePalettes">Floor Palets Count</string>
-    <string name="PoidPalette">Palet Weight +intermediate</string>
+    <string name="PoidPalette">Pallet Weight +intermediate</string>
     <string name="NombredeColis">Packages Count</string>
     <string name="Coliscolonne">Package/Column</string>
     <string name="Colistranche">Package/Slice</string>

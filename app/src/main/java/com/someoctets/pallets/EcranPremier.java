@@ -1,4 +1,4 @@
-package com.someoctets.palets;
+package com.someoctets.pallets;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,21 +10,11 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -32,18 +22,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.view.GestureDetector.OnGestureListener;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import android.content.Context;
-import android.widget.Toast;
-
-
-
-
-
-
 
 
 public class EcranPremier extends AppCompatActivity   {

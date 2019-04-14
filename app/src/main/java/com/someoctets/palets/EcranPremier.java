@@ -1082,8 +1082,12 @@ public void fastMode(){
 
             poidEchantillon.setVisibility(View.VISIBLE);
             nombrePoidEchantillon.setVisibility(View.VISIBLE);
+            if(outils.loadString("defautNombrePoidEchantillon", "").length() > 0){
+                nombrePoidEchantillon.setText(outils.loadString("defautNombrePoidEchantillon", ""));
+            }
 
-         //   nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
+
+            //   nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
             piecesParColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());
 
              poidEchantillon.setNextFocusDownId(findViewById(R.id.nombrePoidEchantillon).getId());
@@ -1094,7 +1098,7 @@ public void fastMode(){
 
 
             fullFastSetup();
-
+            calculer();
 
 
         }else {
@@ -1102,8 +1106,10 @@ public void fastMode(){
 
             colisParColonne.getText().clear();
             colisParTranche.getText().clear();
+
             piecesAbimees.getText().clear();
             nombreColisEchantillon.getText().clear();
+
             poidEchantillon.getText().clear();
             nombrePoidEchantillon.getText().clear();
 
@@ -1122,7 +1128,7 @@ public void fastMode(){
             piecesParColis.setNextFocusDownId(findViewById(R.id.fab).getId());
 
 
-
+            calculer();
           //  fullFastSetup();
 
         }

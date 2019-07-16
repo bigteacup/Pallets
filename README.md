@@ -1,1 +1,1 @@
-# Palets
+# Pallets

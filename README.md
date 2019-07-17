@@ -16,7 +16,7 @@ Calcule automatiquement :
 - L'écart (Delta) entre le poids net facturé et le poids net réel
 - Tare palettes + palettes intermédiaires
 - Tare colis
-- Nombre de pièces par colis et par lots
+- Nombre de pièces par colis et par lots (saisie directe ou échantillonnage)
 - Nombre de colis (Multiplicateur Colonne-Tranche si nécessaire)
 - Taux de pièces abîmées
 - Poids Net moyen par colis

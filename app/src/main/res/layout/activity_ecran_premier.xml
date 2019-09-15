@@ -111,18 +111,6 @@
     -->
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:visibility="invisible"
-        app:elevation="0dp"
-        app:layout_constraintRight_toRightOf="@+id/linearLayoutA"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutA"
-        app:srcCompat="@android:drawable/ic_media_play" />
-
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"

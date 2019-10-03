@@ -1091,10 +1091,11 @@
 
                 poidEchantillon.setVisibility(View.VISIBLE);
                 nombrePoidEchantillon.setVisibility(View.VISIBLE);
+                /* 
                 if(outils.loadString("defautNombrePoidEchantillon", "").length() > 0){
                     nombrePoidEchantillon.setText(outils.loadString("defautNombrePoidEchantillon", ""));
                 }
-
+*/
 
                 //   nombreDeColis.setNextFocusDownId(findViewById(R.id.colisParColonne).getId());
                 piecesParColis.setNextFocusDownId(findViewById(R.id.poidEchantillon).getId());

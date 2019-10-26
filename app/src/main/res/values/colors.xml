@@ -19,4 +19,18 @@
     <color name="colorPrimary4">#154c04</color>
     <color name="colorPrimaryDark4">#457931</color>
     <color name="colorAccent4">#1e88e5</color>
+
+    <!-- Array of colors that will be used by ViewPager as background colors -->
+    <array name="colorPagesViewPager">
+        <item>#EDD9CF</item>
+        <item>#BED4D6</item>
+        <item>#ADCEB7</item>
+        <item>#F7CF8B</item>
+        <item>#FD96A2</item>
+    </array>
+
 </resources>
+
+
+
+

@@ -37,4 +37,7 @@
     <string name="valeursDefauts">Use default values</string>
     <string name="selectionnerTout">Select all by default</string>
     <string name="masquerMultiplicateur">Hide multiplier</string>
+    <string name="masquerAdditionneur">Hide Adder</string>
+    <string name="addition">Addition</string>
+    <string name="valeurspardefault">Default values : </string>
 </resources>

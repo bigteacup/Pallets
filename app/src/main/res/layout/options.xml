@@ -31,6 +31,27 @@
         android:paddingBottom="20dp"
         android:text="@string/masquerMultiplicateur" />
 
+    <Switch
+        android:id="@+id/masquerAdditionneur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/masquerAdditionneur" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:paddingTop="33dp"
+        android:text="@string/valeurspardefault"
+        android:textStyle="italic" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

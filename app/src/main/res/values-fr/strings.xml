@@ -37,6 +37,10 @@
     <string name="valeursDefauts">Utiliser les valeurs par defaut</string>
     <string name="selectionnerTout">Selectionner tout par defaut</string>
     <string name="masquerMultiplicateur">Masquer Multiplicateur</string>
+    <string name="masquerAdditionneur">Masquer Additionneur</string>
+    <string name="addition">Addition</string>
+    <string name="valeurspardefault">Valeurs par défaut : </string>
+
 
 </resources>
 

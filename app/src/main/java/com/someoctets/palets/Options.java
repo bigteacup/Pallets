@@ -1,9 +1,11 @@
 package com.someoctets.palets;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +22,7 @@ public class Options  extends Activity {
     boolean utiliserValeurParDefaut = false;
     boolean selectionnerToutParDefaut = false;
     boolean masquerMultiplicateur = false;
+    boolean masquerAdditionneur = false;
     // setMasquerMultiplicateur()
     TextInputEditText defautNombrePalettes;
     TextInputEditText defautTarePalette;
@@ -36,6 +39,7 @@ public class Options  extends Activity {
         utiliserValeurParDefaut = outils.loadBoolean("utiliserValeurParDefaut", false);
         selectionnerToutParDefaut = outils.loadBoolean("selectionnerToutParDefaut", true);
         masquerMultiplicateur = outils.loadBoolean("masquerMultiplicateur", true);
+        masquerAdditionneur = outils.loadBoolean("masquerAdditionneur", true);
 
 
 
@@ -71,7 +75,15 @@ public class Options  extends Activity {
 
 
 
+        Switch masquerAdditionneurSwitch = findViewById(R.id.masquerAdditionneur);
+        masquerAdditionneurSwitch.setChecked(masquerAdditionneur);
+        masquerAdditionneurSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+                switcherMasquerAdditionneur();
 
+            }
+        });
 
 
 
@@ -180,6 +192,7 @@ public class Options  extends Activity {
             }
         });
 
+
         }
 
 
@@ -189,6 +202,9 @@ public class Options  extends Activity {
 
 
     public void Back(View v) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", "your message");
+        setResult(RESULT_OK, returnIntent);
         finish() ;
 
     }
@@ -231,6 +247,19 @@ public class Options  extends Activity {
             outils.saveBoolean("masquerMultiplicateur", true);
 
         }
+    }
+
+
+    public void switcherMasquerAdditionneur(){
+        if( masquerAdditionneur == true){
+            masquerAdditionneur = false;
+            outils.saveBoolean("masquerAdditionneur", false);
+        }else {
+            masquerAdditionneur = true;
+            outils.saveBoolean("masquerAdditionneur", true);
+        }
+
+
     }
 
 

@@ -2,17 +2,19 @@ package com.someoctets.palets;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 
-public class EcranPremier  extends AppCompatActivity  implements peseepalettenormale.OnFragmentInteractionListener {
+
+public class EcranPremier  extends AppCompatActivity  implements peseepalettenormale.OnFragmentInteractionListener, peseepalettenormale.SendMessage { // implements peseepalettenormale.PeseeListener
 
 
 
@@ -21,9 +23,18 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
     private ViewPager mViewPager;
 
 
+  //  private FragmentB fragmentB;
+
     @Override
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
+    }
+
+    @Override
+    public void sendData(ArrayList<Double> message1, ArrayList<Double> message2 ) {
+        String tag = "android:switcher:" + R.id.viewpager1 + ":" + 1;
+        reconstructionpalette f = (reconstructionpalette) getSupportFragmentManager().findFragmentByTag(tag);
+        f.displayReceivedData(message1, message2);
     }
 
 
@@ -36,9 +47,6 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.viewpager1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-
 
 
 
@@ -72,7 +80,6 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
 
 
-
             return rootView;
         }
 
@@ -81,7 +88,7 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private String fragments []= {"Calcul","Carte"};
+        private String fragments []= {"calcul","recon"};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -120,3 +127,11 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
 
 }
+///////////
+/*
+          FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.viewpager1, peseepalettenormaleA);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                    return  peseepalettenormaleA;
+ */

@@ -40,4 +40,7 @@
     <string name="masquerAdditionneur">Hide Adder</string>
     <string name="addition">Addition</string>
     <string name="valeurspardefault">Default values : </string>
+    <string name="nbrColisPrevu">Number of needed packages</string>
+    <string name="PoidNetReconstruit">Rebuilded Net Weight</string>
+    <string name="PoidMoyenParColisSource">Basis Average Net Weight/Package</string>
 </resources>

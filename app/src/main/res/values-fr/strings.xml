@@ -40,6 +40,9 @@
     <string name="masquerAdditionneur">Masquer Additionneur</string>
     <string name="addition">Addition</string>
     <string name="valeurspardefault">Valeurs par défaut : </string>
+    <string name="nbrColisPrevu">Nombre de colis prévus</string>
+    <string name="PoidNetReconstruit">Poids Net Reconstruit</string>
+    <string name="PoidMoyenParColisSource">Base Poids moyen/colis</string>
 
 
 </resources>

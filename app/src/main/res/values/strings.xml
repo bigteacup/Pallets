@@ -40,6 +40,9 @@
     <string name="masquerAdditionneur">Masquer Additionneur</string>
     <string name="addition">Addition</string>
     <string name="valeurspardefault">Valeurs par défaut : </string>
+    <string name="nbrColisPrevu">Nombre de colis prévus</string>
+    <string name="PoidNetReconstruit">Poids Net Reconstruit</string>
+    <string name="PoidMoyenParColisSource">Base Poids moyen/colis</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="section_format">Hello World from section: %1$d</string>

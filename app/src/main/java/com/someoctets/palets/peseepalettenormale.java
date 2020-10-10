@@ -3,7 +3,8 @@ package com.someoctets.palets;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,11 @@ import android.view.ViewGroup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -35,7 +36,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -45,6 +45,20 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class peseepalettenormale extends Fragment  {
+
+    SendMessage SM;
+/////////////////////////////////////////////////////////////////
+// interface de communication entre fragment :
+    interface SendMessage {
+        void sendData(ArrayList<Double> message1, ArrayList<Double> message2);
+    }
+
+
+
+
+////////////////////////////////////////////////////////////////
+
+
 
     public SharedPreferences sharedPreferences;
 
@@ -109,6 +123,38 @@ public class peseepalettenormale extends Fragment  {
     boolean masquerMultiplicateur;
     boolean masquerAdditionneur;
     ViewGroup root;
+
+    //entrées :
+    double poidNetAnnonceD = 0.0;
+    double poidBrutD = 0.0;
+    double nombreDePalettesD = 0.0;
+    double poidPaletD = 0.0;
+    double piecesParColisD = 0.0;
+    double colisParColonneD = 0.0;
+    double colisParTrancheD = 0.0;
+    double tareColisD = 0.0;
+    double nombreDeColisD = 0.0;
+    double piecesAbimeesD = 0.0;
+    double nombreColisEchantillonD = 0.0;
+    double poidEchantillonD = 0.0;
+    double nombrePoidEchantillonD = 0.0;
+
+    //resultats :
+    double poidNet = 0.0;
+    double tarePalettes = 0.0;
+    double nombreFruits = 0.0;
+    double poidMoyenColis = 0.0;
+    double tareColisTotale = 0.0;
+    double tareTotale = 0.0;
+    double pourcentageAbimes = 0.0;
+    double poidMoyenParPiece = 0.0;
+    double poidBrutAttendu = 0.0;
+    double delta = 0.0;
+    double nbrePiecesParColis = 0.0;
+  //  ArrayList<Double> listeResultat = new ArrayList<Double>();
+
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: Rename parameter arguments, choose names that match
@@ -171,6 +217,7 @@ public class peseepalettenormale extends Fragment  {
         root = (ViewGroup) inflater.inflate(R.layout.activity_peseepalettenormale, null);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         outils.setSharedPreferences(sharedPreferences);
+
 
 
         reverse = outils.loadBoolean("reverseSwitch", false);
@@ -290,7 +337,6 @@ public class peseepalettenormale extends Fragment  {
         additionInputText = root.findViewById(R.id.additionInputText);
         //TODO gerer etat fab et faire les calculs avec une calculette interne
 
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -404,35 +450,37 @@ public class peseepalettenormale extends Fragment  {
 
 
         // listenner de texte
+
+
         //TODO en cour
         for (MemoryTextInputEditText textInput : listeInputText) {
-            final MemoryTextInputEditText textInput2 = textInput;
-            textInput2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    setSelectedInputEditText(textInput2);
-                }
-            });
+                final MemoryTextInputEditText textInput2 = textInput;
+                textInput2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        setSelectedInputEditText(textInput2);
+                    }
+                });
 
 
-            textInput2.addTextChangedListener(new TextWatcher() {
+                textInput2.addTextChangedListener(new TextWatcher() {
 
-                @Override
-                public void onTextChanged(CharSequence s, int st, int b, int c) {
+                    @Override
+                    public void onTextChanged(CharSequence s, int st, int b, int c) {
 
-                }
+                    }
 
-                @Override
-                public void beforeTextChanged(CharSequence s, int st, int c, int a) {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int st, int c, int a) {
 
-                }
+                    }
 
-                @Override
-                public void afterTextChanged(Editable s) {
-                    fullFastSetup();
-                    calculer();
-                }
-            });
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        fullFastSetup();
+                        calculer();
+                    }
+                });
 
 
             // Set an OnTouchListener to always return true for onTouch events so that a touch
@@ -466,6 +514,56 @@ public class peseepalettenormale extends Fragment  {
                 }
             });
         }
+
+        resultat = root.findViewById(R.id.resultat);
+        resultat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                ArrayList<Double> listeResultats = new ArrayList<Double>();
+                listeResultats.add(0,poidNet);
+                listeResultats.add(1,tarePalettes);
+                listeResultats.add(2,nombreFruits);
+                listeResultats.add(3,poidMoyenColis);
+                listeResultats.add(4,tareColisTotale);
+                listeResultats.add(5,tareTotale);
+                listeResultats.add(6,pourcentageAbimes);
+                listeResultats.add(7,poidMoyenParPiece);
+                listeResultats.add(8,poidBrutAttendu);
+                listeResultats.add(9,delta);
+                listeResultats.add(10,nbrePiecesParColis);
+
+               // SM.sendData(listeResultats);
+
+                ArrayList<Double> listeEntrees = new ArrayList<Double>();
+                listeEntrees.add(0,poidNetAnnonceD);
+                listeEntrees.add(1,poidBrutD);
+                listeEntrees.add(2,nombreDePalettesD);
+                listeEntrees.add(3,poidPaletD);
+                listeEntrees.add(4,piecesParColisD);
+                listeEntrees.add(5,colisParColonneD);
+                listeEntrees.add(6,colisParTrancheD);
+                listeEntrees.add(7,tareColisD);
+                listeEntrees.add(8,nombreDeColisD);
+                listeEntrees.add(9,piecesAbimeesD);
+                listeEntrees.add(10,nombreColisEchantillonD);
+                listeEntrees.add(11,poidEchantillonD);
+                listeEntrees.add(12,nombrePoidEchantillonD);
+
+                SM.sendData(listeResultats, listeEntrees);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     /*
     if( utiliserValeurParDefaut == true) {
 
@@ -497,6 +595,7 @@ public class peseepalettenormale extends Fragment  {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+       // listener =null;
     }
 
     /**
@@ -522,6 +621,12 @@ public class peseepalettenormale extends Fragment  {
 
         } else {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+
+        try {
+            SM = (SendMessage) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
         }
     }
 
@@ -681,19 +786,19 @@ public class peseepalettenormale extends Fragment  {
 
         resultat = root.findViewById(R.id.resultat);
 
-        double poidNetAnnonceD = 0.0;
-        double poidBrutD = 0.0;
-        double nombreDePalettesD = 0.0;
-        double poidPaletD = 0.0;
-        double piecesParColisD = 0.0;
-        double colisParColonneD = 0.0;
-        double colisParTrancheD = 0.0;
-        double tareColisD = 0.0;
-        double nombreDeColisD = 0.0;
-        double piecesAbimeesD = 0.0;
-        double nombreColisEchantillonD = 0.0;
-        double poidEchantillonD = 0.0;
-        double nombrePoidEchantillonD = 0.0;
+         poidNetAnnonceD = 0.0;
+         poidBrutD = 0.0;
+         nombreDePalettesD = 0.0;
+         poidPaletD = 0.0;
+         piecesParColisD = 0.0;
+         colisParColonneD = 0.0;
+         colisParTrancheD = 0.0;
+         tareColisD = 0.0;
+         nombreDeColisD = 0.0;
+         piecesAbimeesD = 0.0;
+         nombreColisEchantillonD = 0.0;
+         poidEchantillonD = 0.0;
+         nombrePoidEchantillonD = 0.0;
 
         try {
             poidNetAnnonceD = Double.parseDouble(poidNetAnnonce.getText().toString());
@@ -749,17 +854,17 @@ public class peseepalettenormale extends Fragment  {
         }
 
 
-        double poidNet = 0.0;
-        double tarePalettes = 0.0;
-        double nombreFruits = 0.0;
-        double poidMoyenColis = 0.0;
-        double tareColisTotale = 0.0;
-        double tareTotale = 0.0;
-        double pourcentageAbimes = 0.0;
-        double poidMoyenParPiece = 0.0;
-        double poidBrutAttendu = 0.0;
-        double delta = 0.0;
-        double nbrePiecesParColis = 0.0;
+         poidNet = 0.0;
+         tarePalettes = 0.0;
+         nombreFruits = 0.0;
+         poidMoyenColis = 0.0;
+         tareColisTotale = 0.0;
+         tareTotale = 0.0;
+         pourcentageAbimes = 0.0;
+         poidMoyenParPiece = 0.0;
+         poidBrutAttendu = 0.0;
+         delta = 0.0;
+         nbrePiecesParColis = 0.0;
 
         //TODO Penser a un systeme  plus ergonomique pour le calcul du nombre et du poid de palette intermediaires
         if (nombreDeColisD < 1) {
@@ -793,6 +898,7 @@ public class peseepalettenormale extends Fragment  {
                 nbrePiecesParColis = (poidMoyenColis / poidEchantillonD) * nombrePoidEchantillonD;
             } else {
                 nombreFruits = nombreDeColisD * piecesParColisD;
+                nbrePiecesParColis = piecesParColisD;
             }
         } catch (Exception e) {
         }
@@ -908,11 +1014,17 @@ public class peseepalettenormale extends Fragment  {
 
                 )
                 ;
+
             }
         }
+       /* //////
+        //On envoie les données au fragment au click sur le bouton
+         poidMoyenColis);
+
+
+        */
+
     }
-
-
 
 
 

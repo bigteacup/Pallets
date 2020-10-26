@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -21,15 +20,16 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link reconstructionpalette.OnFragmentInteractionListener} interface
+ * {@link Reconstructionpalette.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link reconstructionpalette#newInstance} factory method to
+ * Use the {@link Reconstructionpalette#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class reconstructionpalette extends Fragment {
-   ViewGroup root ;
-    TextView txtData;
 
+public class Reconstructionpalette extends Fragment {
+   ViewGroup root ;
+
+    TextView txtData;
 
     //entrées reçus :
     double poidNetAnnonceD = 0.0;
@@ -77,7 +77,7 @@ public class reconstructionpalette extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public reconstructionpalette() {
+    public Reconstructionpalette() {
         // Required empty public constructor
     }
 
@@ -87,11 +87,11 @@ public class reconstructionpalette extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment reconstructionpalette.
+     * @return A new instance of fragment Reconstructionpalette.
      */
     // TODO: Rename and change types and number of parameters
-    public static reconstructionpalette newInstance(String param1, String param2) {
-        reconstructionpalette fragment = new reconstructionpalette();
+    public static Reconstructionpalette newInstance(String param1, String param2) {
+        Reconstructionpalette fragment = new Reconstructionpalette();
 
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -179,7 +179,7 @@ public class reconstructionpalette extends Fragment {
     protected void displayReceivedData(ArrayList<Double> listeResultats, ArrayList<Double> listeEntrees)
     {
        try {
-           txtData.setText("Données reçues : "+ "\n" +
+   /*        txtData.setText("Données reçues : "+ "\n" +
                            listeResultats.get(0) + "\n" +
                            listeResultats.get(1) + "\n" +
                            listeResultats.get(2) + "\n" +
@@ -193,6 +193,8 @@ public class reconstructionpalette extends Fragment {
                            listeResultats.get(10) + "\n"
 
                    );
+
+    */
         //   listeResultats.add(0,poidNet);
         //   listeResultat.add(1,tarePalettes);
         //   listeResultat.add(2,nombreFruits);
@@ -255,6 +257,7 @@ public class reconstructionpalette extends Fragment {
 
 
        }catch(Exception e){}
+    calculer();
     }
 
 
@@ -263,26 +266,54 @@ public class reconstructionpalette extends Fragment {
 
     public void calculer(){
         double nombreColisVoulus  = 0.0;
-         //nombreColisET = root.findViewById(R.id.nombreColis);
+        //nombreColisET = root.findViewById(R.id.nombreColis);
         NumberFormat nf = new DecimalFormat("0.###");
+/*
+        //on tranfomre en string :
+        String tareTotaleString = nf.format(tareTotale);
+        String tarePalettesString = nf.format(tarePalettes);
+        String tareColisTotaleString = nf.format(tareColisTotale);
+        String poidMoyenParPieceString = nf.format(poidMoyenParPiece);
+        String nombreFruitsString = nf.format(nombreFruits);
+        String nbrePiecesParColisString = nf.format(nbrePiecesParColis);
+        if (poidBrut.getText().length() == 0) {
+            poidMoyenParPieceString = getString(R.string.BrutManquant);
+        }
+        String pourcentageAbimesString = nf.format(pourcentageAbimes);
+        String poidMoyenColisString = nf.format(poidsMoyenColis);
+        if (poidBrut.getText().length() == 0) {
+            poidMoyenColisString = getString(R.string.BrutManquant);
+        }
+        String poidBrutAttenduString = nf.format(poidBrutAttendu);
+        if (poidNetAnnonce.getText().length() == 0) {
+            poidBrutAttenduString = getString(R.string.NetManquant);
+        }
+        String deltaString = nf.format(delta);
+        if (poidBrut.getText().length() == 0 || poidNetAnnonceD.length() == 0) {
+            deltaString = getString(R.string.BrutNetManquant);
+        }
+
+
+*/
+
         try {
             nombreColisVoulus = Double.parseDouble(nombreColisET.getText().toString());
         } catch (Exception e) {
+            nombreColisVoulus = 0;
         }
 
 
       //double resultat =  (nombreColisVoulus * poidsMoyenColis );
-        txtData.setText(getString(R.string.PoidMoyenParColisSource) + " : " + nf.format(poidsMoyenColis)  + "\n" +
-                getString(R.string.PoidNetReconstruit) + " : " + nf.format(nombreColisVoulus * poidsMoyenColis) + "\n" +
-                getString(R.string.Delta) + " : " + nf.format((nombreColisVoulus * poidsMoyenColis) - poidNetAnnonceD) + "\n" +
-                getString(R.string.Piecescolis) + " :  " + nf.format(nbrePiecesParColis) + "\n" +
-                getString(R.string.NombredeFruits) + " : " + nf.format(nbrePiecesParColis*nombreColisVoulus) + "\n" +
-                getString(R.string.PoidMoyenPièce) + " : " + nf.format(poidMoyenParPiece)
+        try {
+            txtData.setText(getString(R.string.PoidMoyenParColisSource) + " : " + (poidsMoyenColis) + "\n" +
+                    getString(R.string.PoidNetReconstruit) + " : " + nf.format(nombreColisVoulus * poidsMoyenColis) + "\n" +
+                    getString(R.string.Delta) + " : " + nf.format((nombreColisVoulus * poidsMoyenColis) - poidNetAnnonceD) + "\n" +
+                    getString(R.string.Piecescolis) + " :  " + nf.format(nbrePiecesParColis) + "\n" +
+                    getString(R.string.NombredeFruits) + " : " + nf.format(nbrePiecesParColis * nombreColisVoulus) + "\n" +
+                    getString(R.string.PoidMoyenPièce) + " : " + nf.format(poidMoyenParPiece)
 
 
-
-
-
-        );
+            );
+        }catch (Exception e){}
     }
 }

@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
-public class EcranPremier  extends AppCompatActivity  implements peseepalettenormale.OnFragmentInteractionListener, peseepalettenormale.SendMessage { // implements peseepalettenormale.PeseeListener
+public class EcranPremier  extends AppCompatActivity  implements Peseepalettenormale.OnFragmentInteractionListener, Peseepalettenormale.SendMessage, Peseepalettenormale.SendMail { // implements Peseepalettenormale.PeseeListener
 
-
+    Communication com = new Communication() ;
+    Peseepalettenormale calcul = new Peseepalettenormale();
+    Reconstructionpalette recon = new Reconstructionpalette();
 
     //private SectionsPagerAdapter mSectionsPagerAdapter;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -32,11 +34,20 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
     @Override
     public void sendData(ArrayList<Double> message1, ArrayList<Double> message2 ) {
-        String tag = "android:switcher:" + R.id.viewpager1 + ":" + 1;
-        reconstructionpalette f = (reconstructionpalette) getSupportFragmentManager().findFragmentByTag(tag);
-        f.displayReceivedData(message1, message2);
-    }
 
+            String tag = "android:switcher:" + R.id.viewpager1 + ":" + 2;
+            Reconstructionpalette f = (Reconstructionpalette) getSupportFragmentManager().findFragmentByTag(tag);
+            f.displayReceivedData(message1, message2);
+
+        }
+    @Override
+    public void sendDataMail(ArrayList<Double> message1, ArrayList<Double> message2 ) {
+
+        String tag = "android:switcher:" + R.id.viewpager1 + ":" + 0;
+        Communication f = (Communication) getSupportFragmentManager().findFragmentByTag(tag);
+        f.displayReceivedData(message1, message2);
+
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -48,7 +59,12 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
         mViewPager = (ViewPager) findViewById(R.id.viewpager1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        //fragement par default
+        mViewPager.setCurrentItem(1);
 
+        if (savedInstanceState == null) {
+    //        bottomNavigation.setSelectedItemId(R.id.infos); // change to whichever id should be default
+        }
 
 
     }
@@ -75,6 +91,7 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            //inutile
             View rootView = inflater.inflate(R.layout.activity_peseepalettenormale, container, false);
 
 
@@ -88,7 +105,7 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private String fragments []= {"calcul","recon"};
+        private String fragments []= {"com","calcul","recon"};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -99,9 +116,12 @@ public class EcranPremier  extends AppCompatActivity  implements peseepalettenor
 
             switch (position) {
                 case 0:
-                    return new peseepalettenormale();
+                    return com ;
                 case 1:
-                    return new reconstructionpalette();
+                    return calcul ;
+                case 2:
+                    return recon;
+
                 default:
                     return null;
 

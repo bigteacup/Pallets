@@ -39,21 +39,24 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link peseepalettenormale.OnFragmentInteractionListener} interface
+ * {@link Peseepalettenormale.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link peseepalettenormale#newInstance} factory method to
+ * Use the {@link Peseepalettenormale#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class peseepalettenormale extends Fragment  {
+public class Peseepalettenormale extends Fragment  {
 
     SendMessage SM;
+    SendMail SMAIL;
 /////////////////////////////////////////////////////////////////
 // interface de communication entre fragment :
     interface SendMessage {
         void sendData(ArrayList<Double> message1, ArrayList<Double> message2);
     }
 
-
+    interface SendMail{
+        void sendDataMail(ArrayList<Double> message1, ArrayList<Double> message2);
+    }
 
 
 ////////////////////////////////////////////////////////////////
@@ -168,7 +171,7 @@ public class peseepalettenormale extends Fragment  {
 
     private OnFragmentInteractionListener mListener;
 
-    public peseepalettenormale() {
+    public Peseepalettenormale() {
         // Required empty public constructor
     }
 
@@ -178,11 +181,11 @@ public class peseepalettenormale extends Fragment  {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment peseepalettenormale.
+     * @return A new instance of fragment Peseepalettenormale.
      */
     // TODO: Rename and change types and number of parameters
-    public static peseepalettenormale newInstance(String param1, String param2) {
-        peseepalettenormale fragment = new peseepalettenormale();
+    public static Peseepalettenormale newInstance(String param1, String param2) {
+        Peseepalettenormale fragment = new Peseepalettenormale();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -555,7 +558,9 @@ public class peseepalettenormale extends Fragment  {
                 listeEntrees.add(11,poidEchantillonD);
                 listeEntrees.add(12,nombrePoidEchantillonD);
 
+                //envoi des données via les interfaces.
                 SM.sendData(listeResultats, listeEntrees);
+                SMAIL.sendDataMail(listeResultats, listeEntrees);
             }
 
             @Override
@@ -626,7 +631,12 @@ public class peseepalettenormale extends Fragment  {
         try {
             SM = (SendMessage) getActivity();
         } catch (ClassCastException e) {
-            throw new ClassCastException("Error in retrieving data. Please try again");
+            throw new ClassCastException("SendMessage : Error in retrieving data. Please try again");
+        }
+        try {
+            SMAIL = (SendMail) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("SendMail : Error in retrieving data. Please try again");
         }
     }
 

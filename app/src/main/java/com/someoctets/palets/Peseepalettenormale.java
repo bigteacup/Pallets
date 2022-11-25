@@ -67,7 +67,7 @@ public class Peseepalettenormale extends Fragment  {
 
 
     boolean fast = false;
-    boolean reverse = false;
+    boolean modeBL = false;
 
     private LinearLayout linearLayoutA;
 
@@ -223,7 +223,7 @@ public class Peseepalettenormale extends Fragment  {
 
 
 
-        reverse = outils.loadBoolean("reverseSwitch", false);
+        modeBL = outils.loadBoolean("reverseSwitch", false);
         fast = outils.loadBoolean("fullFastSwitch", false);
 
         poidBrut = root.findViewById(R.id.poidBrut);
@@ -309,14 +309,14 @@ public class Peseepalettenormale extends Fragment  {
                 });
 
         Switch reverseSwitch = root.findViewById(R.id.reverse);
-        reverseSwitch.setChecked(reverse);
-        reversePalets();
+        reverseSwitch.setChecked(modeBL);
+        appliquerModeBL();
         reverseSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
-                switcherReverse();
-                reversePalets();
+                switcherModeBL();
+                appliquerModeBL();
 
             }
         });
@@ -968,7 +968,7 @@ public class Peseepalettenormale extends Fragment  {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (fast == true) {
-            if (reverse == false) {
+            if (modeBL == false) {
                 resultat.setText(
                         getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
                                 getString(R.string.NombredeFruits) + " : " + nombreFruitsString + "\n" +
@@ -994,7 +994,7 @@ public class Peseepalettenormale extends Fragment  {
 
         } else {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (reverse == false) {
+            if (modeBL == false) {
                 resultat.setText(
                         getString(R.string.PoidNetréel) + " : " + poidNetString + "\n" +
                                 getString(R.string.NombredeFruits) + " : " + nombreFruitsString + "\n" +
@@ -1284,13 +1284,13 @@ public class Peseepalettenormale extends Fragment  {
 
 
 
-    public void switcherReverse() {
-        if (reverse == true) {
-            reverse = false;
-            outils.saveBoolean("reverseSwitch", false);
+    public void switcherModeBL() {
+        if (modeBL == true) {
+            modeBL = false;
+            outils.saveBoolean("modeBLSwitch", false);
         } else {
-            reverse = true;
-            outils.saveBoolean("reverseSwitch", true);
+            modeBL = true;
+            outils.saveBoolean("modeBLSwitch", true);
         }
     }
 
@@ -1301,13 +1301,13 @@ public class Peseepalettenormale extends Fragment  {
 
 
 
-    public void reversePalets() {
+    public void appliquerModeBL() {
 
         poidNetInputLayout = root.findViewById(R.id.poidNetInputLayout);
         poidNetAnnonce = root.findViewById(R.id.poidNetAnnonce);
         poidBrut = root.findViewById(R.id.poidBrut);
 
-        if (reverse == false) {
+        if (modeBL == false) {
             poidNetInputLayout.setVisibility(View.GONE);
             poidBrut.requestFocus();
             poidNetAnnonce.getText().clear();

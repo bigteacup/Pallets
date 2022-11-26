@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.someoctets.palets"
         minSdkVersion 14
-        targetSdkVersion 29
-        versionCode 53
-        versionName "53"
+        targetSdkVersion 33
+        versionCode 57
+        versionName "57"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -223,7 +223,7 @@ public class Peseepalettenormale extends Fragment  {
 
 
 
-        modeBL = outils.loadBoolean("reverseSwitch", false);
+        modeBL = outils.loadBoolean("modeBLSwitch", false);
         fast = outils.loadBoolean("fullFastSwitch", false);
 
         poidBrut = root.findViewById(R.id.poidBrut);

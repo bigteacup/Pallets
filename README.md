@@ -24,7 +24,7 @@ Calcule automatiquement :
 
 
 Info :
-- Les poids des palettes intermédiaires sont à ajouter à la tare palette et non à entrer dans le champs "Nombre de palettes au Sol".
+- Les poids des palettes intermédiaires sont à ajouter à la tare palette et non à entrer dans le champ "Nombre de palettes au Sol".
 
 - Le "Delta" est calculé entre le "poids net annoncé" et le poids net déterminé par le "poids brut" de votre pesée nommé "poids net réel" dans les résultats. 
 

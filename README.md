@@ -4,7 +4,7 @@ Sert à calculer le nombre de colis, de pièces, les poids bruts et nets afin de
 Vous pouvez déterminer facilement tout les éléments nécessaires à un agréage précis en une saisie rapide des éléments connus.
 
 Fonctionnalités :
-- Les calculs se lancent immédiatement à chaque saisie de chiffre.
+- Les calculs se lancent immédiatement à chaque saisie de chiffres.
 - Il n'est pas nécessaire de saisir les données qui ne vous intéressent pas. 
 - Plusieurs modes d'affichage visant à épurer les champs de saisie afin de viser une simplicité maximum. 
 - Personnalisation des valeurs par défauts des champs de saisie etc...
